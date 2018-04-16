@@ -16,15 +16,34 @@ module.exports = {
     },
 
     module: {
-        // rules: [
-        //     {
-        //         test: /\.jsx?/,
-        //         include: [
-        //             path.resolve(__dirname, 'src')
-        //         ],
-        //         use: 'babel-loader',
-        //     }
-        // ]
+        rules: [
+            // {
+            //     test: /\.jsx?/,
+            //     include: [
+            //         path.resolve(__dirname, 'src')
+            //     ],
+            //     use: 'babel-loader',
+            // },
+            {
+                test: /\.css/,
+                include: [
+                    path.resolve(__dirname, 'src'),
+                ],
+                use: [
+                    'style-loader',
+                    'css-loader',
+                ]
+            },
+            {
+                test: /\.(png|jpg|gif)$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {},
+                    }
+                ]
+            }
+        ]
     },
 
     // 代码模块路径解析的配置
