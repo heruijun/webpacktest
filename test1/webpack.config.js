@@ -19,7 +19,11 @@ module.exports = {
         extensions: ['.js', '.vue', '.json'],   // 优先级：js > vue > json
         alias: {
             utils$: path.resolve(__dirname, 'src/utils') // 只会匹配 import 'utils'
-        }
+        },
+        modules: [
+            path.resolve(__dirname, 'node_modules'),    // 指定当前目录下的 node_modules 优先查找
+            'node_modules',     // 如果有一些类库是放在一些奇怪的地方的，你可以添加自定义的路径或者目录
+        ]
     },
 
     module: {
