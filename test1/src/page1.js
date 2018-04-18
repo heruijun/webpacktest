@@ -1,1 +1,3 @@
-console.log('page1')
+import { test } from 'utils'
+
+console.log(test())

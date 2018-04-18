@@ -1,1 +1,1 @@
-alert('page2')
+console.log('page2')

@@ -15,6 +15,13 @@ module.exports = {
         filename: 'bundle.js',
     },
 
+    resolve: {
+        extensions: ['.js', '.vue', '.json'],
+        alias: {
+            utils$: path.resolve(__dirname, 'src/utils') // 只会匹配 import 'utils'
+        }
+    },
+
     module: {
         rules: [
             // {
