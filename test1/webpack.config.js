@@ -1,6 +1,7 @@
 const path = require('path')
 const UglifyPlugin = require('uglifyjs-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = {
     entry: {
@@ -28,6 +29,13 @@ module.exports = {
 
     module: {
         rules: [
+            {
+                test: /\.js/,
+                include: [
+                    path.resolve(__dirname, 'src'),
+                ],
+                type: 'javascript/esm',     // 指定模块类型
+            },
             // {
             //     test: /\.jsx?/,
             //     include: [
@@ -76,5 +84,9 @@ module.exports = {
             filename: 'hello.html',
             template: 'assets/index.html'
         }),
+
+        new CopyWebpackPlugin([
+            { from: 'src/res/file.txt', to: 'build/res_copy/file.txt' }
+        ])
     ]
 }
