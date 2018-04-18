@@ -1,3 +1,3 @@
 import { test } from 'utils'
 
-console.log(test())
+console.log(test('测试1'))

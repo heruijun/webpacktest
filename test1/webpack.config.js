@@ -16,7 +16,7 @@ module.exports = {
     },
 
     resolve: {
-        extensions: ['.js', '.vue', '.json'],
+        extensions: ['.js', '.vue', '.json'],   // 优先级：js > vue > json
         alias: {
             utils$: path.resolve(__dirname, 'src/utils') // 只会匹配 import 'utils'
         }
