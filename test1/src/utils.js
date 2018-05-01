@@ -15,3 +15,18 @@ export function foo({ x , y = 5 } = {} ) {
 export function m2({ x, y } = { x : 1, y : 2 }) {
     return [ x, y ]
 }
+
+// promise加载图片
+export function loadImage(src) {
+    const promise = new Promise((resolve, reject) => {
+        let img = document.createElement('img')
+        img.onload = function() {
+            resolve(img)
+        }
+        img.onerror = function() {
+            reject('未找到图片')
+        }
+        img.src = src
+    })
+    return promise
+}

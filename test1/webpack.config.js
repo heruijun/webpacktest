@@ -8,6 +8,7 @@ module.exports = {
         main: [
             './src/page1.js',
             './src/page2.js',
+            './src/page3.js'
         ]
     },
 
