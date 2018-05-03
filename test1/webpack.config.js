@@ -4,17 +4,31 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = {
+    // ------------ 以下是单文件输出 ------------
+    // entry: {
+    //     main: [
+    //         './src/page1.js',
+    //         './src/page2.js',
+    //         './src/page3.js'
+    //     ]
+    // },
+
+    // output: {
+    //     path: path.resolve(__dirname, 'dist'),
+    //     filename: 'bundle.js',
+    // },
+
+    // ------------ 以下是多文件输出 ------------
     entry: {
-        main: [
-            './src/page1.js',
-            './src/page2.js',
-            './src/page3.js'
-        ]
+        page1: './src/page1.js',
+        page2: './src/page2.js',
+        page3: './src/page3.js',
+        login: './src/login.js'
     },
 
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: 'bundle.js',
+        filename: '[name].js'
     },
 
     resolve: {
@@ -83,8 +97,16 @@ module.exports = {
         // 如果你留意了我们一开始直接使用 webpack 构建的结果，你会发现默认已经使用了 JS 代码压缩的插件
         // 这其实也是我们命令中的 --mode production 的效果
         new HtmlWebpackPlugin({
-            filename: 'hello.html',
-            template: 'assets/index.html'
+            filename: 'index.html', // 输出到dist的文件名
+            template: 'assets/index.html',
+            hash: true  // 会在打包好的bundle.js后面加上hash串
+        }),
+
+        new HtmlWebpackPlugin({
+            filename: 'login.html',
+            template: 'assets/login.html',
+            hash: true,
+            chunks: ['page1', 'login']   // 对应关系,login.js对应的是login.html
         }),
 
         new CopyWebpackPlugin([
