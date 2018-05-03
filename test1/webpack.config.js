@@ -2,6 +2,8 @@ const path = require('path')
 const UglifyPlugin = require('uglifyjs-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+// 拆分css样式的插件
+let ExtractTextWebpackPlugin = require('extract-text-webpack-plugin')
 
 module.exports = {
     // ------------ 以下是单文件输出 ------------
@@ -58,15 +60,22 @@ module.exports = {
             //     ],
             //     use: 'babel-loader',
             // },
+            // {
+            //     test: /\.css/,
+            //     include: [
+            //         path.resolve(__dirname, 'src'),
+            //     ],
+            //     use: [
+            //         'style-loader',
+            //         'css-loader',
+            //     ]
+            // },
             {
-                test: /\.css/,
-                include: [
-                    path.resolve(__dirname, 'src'),
-                ],
-                use: [
-                    'style-loader',
-                    'css-loader',
-                ]
+                test: /\.css$/,
+                use: ExtractTextWebpackPlugin.extract({
+                    // 将css用link的方式引入就不再需要style-loader了
+                    use: 'css-loader'
+                })
             },
             {
                 test: /\.(png|jpg|gif)$/,
@@ -111,6 +120,9 @@ module.exports = {
 
         new CopyWebpackPlugin([
             { from: 'src/res/file.txt', to: 'build/res_copy/file.txt' }
-        ])
+        ]),
+
+        // 拆分后会把css文件放到dist目录下的css/style.css
+        new ExtractTextWebpackPlugin('css/style.css')
     ]
 }
