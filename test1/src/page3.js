@@ -9,15 +9,15 @@ result1.then((img) => {
     console.log(img.width)
     return img
 }, () => console.log('failed'))
-.then((img) => {
-    console.log(img.height)
-    return img
-}).then((img) => {
-    document.body.appendChild(img)
-    return result2
-}).then((img) => {
-    document.body.appendChild(img)
-}).catch(ex => console.log(ex))
+    .then((img) => {
+        console.log(img.height)
+        return img
+    }).then((img) => {
+        document.body.appendChild(img)
+        return result2
+    }).then((img) => {
+        document.body.appendChild(img)
+    }).catch(ex => console.log(ex))
 
 // 待全部处理完之后，统一执行success
 Promise.all([result1, result2]).then(datas => {
