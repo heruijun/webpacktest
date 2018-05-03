@@ -3,7 +3,8 @@ const UglifyPlugin = require('uglifyjs-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 // 拆分css样式的插件
-let ExtractTextWebpackPlugin = require('extract-text-webpack-plugin')
+const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
 
 module.exports = {
     // ------------ 以下是单文件输出 ------------
@@ -60,23 +61,26 @@ module.exports = {
             //     ],
             //     use: 'babel-loader',
             // },
-            // {
-            //     test: /\.css/,
-            //     include: [
-            //         path.resolve(__dirname, 'src'),
-            //     ],
-            //     use: [
-            //         'style-loader',
-            //         'css-loader',
-            //     ]
-            // },
+            {
+                test: /\.js$/,
+                use: 'babel-loader',
+                include: /src/,          // 只转化src目录下的js
+                exclude: /node_modules/  // 排除掉node_modules，优化打包速度
+            },
             {
                 test: /\.css$/,
-                use: ExtractTextWebpackPlugin.extract({
-                    // 将css用link的方式引入就不再需要style-loader了
-                    use: 'css-loader'
-                })
+                include: [
+                    path.resolve(__dirname, 'src'),
+                ],
+                use: ['style-loader', 'css-loader', 'postcss-loader']
             },
+            // {
+            //     test: /\.css$/,
+            //     use: ExtractTextWebpackPlugin.extract({
+            //         // 将css用link的方式引入就不再需要style-loader了
+            //         use: 'css-loader'
+            //     })
+            // },
             {
                 test: /\.(png|jpg|gif)$/,
                 use: [
@@ -86,7 +90,31 @@ module.exports = {
                     }
                 ]
             },
-            { test: /\.js$/, exclude: /node_modules/, loader: "babel-loader" }
+            {
+                test: /\.(eot|ttf|woff|svg)$/,
+                use: 'file-loader'
+            },
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                loader: "babel-loader"
+            },
+            {
+                test: /\.(jpe?g|png|gif)$/,
+                use: [
+                    {
+                        loader: 'url-loader',
+                        options: {
+                            limit: 8192,    // 小于8k的图片自动转成base64格式，并且不会存在实体图片
+                            outputPath: 'images/'   // 图片打包后存放的目录
+                        }
+                    }
+                ]
+            },
+            {
+                test: /\.(htm|html)$/,
+                use: 'html-withimg-loader'
+            }
         ]
     },
 
@@ -123,6 +151,9 @@ module.exports = {
         ]),
 
         // 拆分后会把css文件放到dist目录下的css/style.css
-        new ExtractTextWebpackPlugin('css/style.css')
+        new ExtractTextWebpackPlugin('css/style.css'),
+
+        // 打包前先清空
+        new CleanWebpackPlugin('dist')
     ]
 }
