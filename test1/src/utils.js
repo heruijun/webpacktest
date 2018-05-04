@@ -8,25 +8,41 @@ export const numbers = (...numbers) => {
 }
 
 // 当参数为一个对象时
-export function foo({ x , y = 5 } = {} ) {
+export function foo({ x, y = 5 } = {}) {
     console.log(x, y)
 }
 
-export function m2({ x, y } = { x : 1, y : 2 }) {
-    return [ x, y ]
+export function m2({ x, y } = { x: 1, y: 2 }) {
+    return [x, y]
 }
 
 // promise加载图片
 export function loadImage(src) {
     const promise = new Promise((resolve, reject) => {
         let img = document.createElement('img')
-        img.onload = function() {
+        img.onload = function () {
             resolve(img)
         }
-        img.onerror = function() {
+        img.onerror = function () {
             reject('未找到图片')
         }
         img.src = src
     })
     return promise
+}
+
+// 过滤标点符号
+export function wordOnlyText(originalText) {
+    let wordOnlyText = ''
+
+    for (let i = 0; i < originalText.length; ++i) {
+        const letter = originalText[i]
+        const asciiCode = letter.charCodeAt()
+
+        if ((asciiCode >= 65 && asciiCode <= 90) || (asciiCode >= 97 && asciiCode <= 122) || asciiCode === 32) {
+            wordOnlyText += letter
+        }
+    }
+
+    return wordOnlyText
 }

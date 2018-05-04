@@ -1,5 +1,6 @@
 const path = require('path')
 const UglifyPlugin = require('uglifyjs-webpack-plugin')
+// html生成器，可以指定模版文件
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 // 拆分css样式的插件
