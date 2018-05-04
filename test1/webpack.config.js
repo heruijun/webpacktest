@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 // 拆分css样式的插件
 const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin')
+// 删除build目录
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 
 module.exports = {
@@ -55,18 +56,11 @@ module.exports = {
                 type: 'javascript/esm',     // 指定模块类型
             },
             // {
-            //     test: /\.jsx?/,
-            //     include: [
-            //         path.resolve(__dirname, 'src')
-            //     ],
+            //     test: /\.js$/,
             //     use: 'babel-loader',
+            //     include: /src/,          // 只转化src目录下的js
+            //     exclude: /node_modules/  // 排除掉node_modules，优化打包速度
             // },
-            {
-                test: /\.js$/,
-                use: 'babel-loader',
-                include: /src/,          // 只转化src目录下的js
-                exclude: /node_modules/  // 排除掉node_modules，优化打包速度
-            },
             {
                 test: /\.css$/,
                 include: [
@@ -93,11 +87,6 @@ module.exports = {
             {
                 test: /\.(eot|ttf|woff|svg)$/,
                 use: 'file-loader'
-            },
-            {
-                test: /\.js$/,
-                exclude: /node_modules/,
-                loader: "babel-loader"
             },
             {
                 test: /\.(jpe?g|png|gif)$/,
