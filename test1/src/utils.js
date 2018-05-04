@@ -46,3 +46,21 @@ export function wordOnlyText(originalText) {
 
     return wordOnlyText
 }
+
+// 数组工具类
+export const arrayUtils = {
+    append(array, ...elements) {
+        array.push(...elements)
+        return array
+    },
+
+    prepend(array, ...elements) {
+        array.unshift(...elements)
+        return array
+    },
+
+    insert(array, index, ...elements) {
+        array.splice(index, 0, ...elements)
+        return array
+    }
+}

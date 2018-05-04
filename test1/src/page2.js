@@ -15,3 +15,8 @@ Here is Turing Airline, you are the ${level} member of our Privilege Club.
 console.log(message)
 
 console.log(utils.wordOnlyText('Hey dude, how is it going?'))
+
+const array = []
+console.log(utils.arrayUtils.append(array, 3))
+console.log(utils.arrayUtils.prepend(array, 1))
+console.log(utils.arrayUtils.insert(array, 1, 2))
