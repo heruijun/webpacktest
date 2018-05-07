@@ -20,3 +20,12 @@ const array = []
 console.log(utils.arrayUtils.append(array, 3))
 console.log(utils.arrayUtils.prepend(array, 1))
 console.log(utils.arrayUtils.insert(array, 1, 2))
+console.log(utils.arrayUtils.remove(array, 1))
+
+console.log('累加：' + utils.arrayUtils.sum(array))
+console.log('乘积：' + utils.arrayUtils.multi(array))
+
+const addedArray = array.map((x) => {
+  return x + 2
+})
+console.log(addedArray)

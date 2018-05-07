@@ -62,5 +62,22 @@ export const arrayUtils = {
     insert(array, index, ...elements) {
         array.splice(index, 0, ...elements)
         return array
+    },
+
+    remove(array, index) {
+        array.splice(index, 1)
+        return array
+    },
+
+    sum(array) {
+        return array.reduce(function (left, right) {
+            return left + right
+        })
+    },
+
+    multi(array) {
+        return array.reduce(function (left, right) {
+            return left * right
+        })
     }
 }
