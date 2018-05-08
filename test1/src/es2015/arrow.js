@@ -9,3 +9,14 @@ const newSet = names.map((name, index) => ({
   name: name
 }))
 console.log(newSet)
+
+// --------------
+const fun = (function () {
+  'use strict'
+
+  return (x = 30) => {
+    return x
+  }
+}())
+
+console.log(fun(15))
