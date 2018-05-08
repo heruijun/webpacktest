@@ -21,5 +21,5 @@ let iteratorObj = {
 }
 
 for (let item of iteratorObj) {
-  console.log(item);
-} 
+  console.log(item)
+}
