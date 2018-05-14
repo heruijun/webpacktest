@@ -25,6 +25,7 @@ module.exports = {
 
     // ------------ 以下是多文件输出 ------------
     entry: {
+        vue: './src/assets/vue-2.5.16.js',
         page1: './src/page1.js',
         page2: './src/page2.js',
         page3: './src/page3.js',
