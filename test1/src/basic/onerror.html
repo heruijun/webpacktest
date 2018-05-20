@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script>
+    // 捕获错误，参数不能设置为false，因为冒泡获取不到
+    window.addEventListener('error', function (e) {
+      console.log('捕获：', e)
+    }, true)
+  </script>
+</head>
+
+<body>
+  <script src="//baidu.com/test.js"></script>
+  <script>
+      //错误上报，用image方式，比ajax简单且不需要库
+      (new Image()).src = 'http://baidu.com/tesjk?r=tksjk';
+  </script>
+</body>
+
+</html>

@@ -48,3 +48,10 @@ module.exports = {
     mode: 'development'      // 模式配置
 }
 ```
+
+# 小技巧
+1. 获取界面所以资源
+    performance.getEntries().forEach(item=>console.log(item.name))
+
+2. 获取多少图片未加载
+    document.getElementsByTagName('img')与上面获取资源的方法计算出
